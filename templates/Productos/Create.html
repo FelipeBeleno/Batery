@@ -1,0 +1,85 @@
+{% extends 'Categoria/Create.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block titulo %}
+    Crear Producto
+{% endblock %}
+{% block titulobody %}
+    <h1>Registro de nuevo producto</h1>
+{% endblock %}
+{% block contenido %}
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Validacion de errores -->
+        {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <!-- fin de la validacion de errores -->
+
+        <div class="row">
+
+            <div class="col-lg-6 mx-auto">
+                <div class="form-group">
+                    <label><i class="fa fa-file-prescription"></i> Nombre:</label>
+                    {{ form.nombre }}
+                </div>
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <div class="form-group">
+                    <label><i class="fa fa-file-prescription"></i> Precio:</label>
+                    {{ form.precio }}
+                </div>
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <div class="form-group">
+                    <label><i class="fa fa-spell-check"></i> Descripcion:</label>
+                    {{ form.descripcion }}
+                </div>
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <div class="form-group">
+                    <label><i class="fa fa-spell-check"></i> Categoria:</label>
+                    {{ form.categoria }}
+                </div>
+            </div>
+
+            <div class="col-lg-6 mx-auto">
+                <div class="form-group">
+                    <label><i class="fa fa-spell-check"></i> Imagen:</label>
+                    {{ form.imagen }}
+                </div>
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <div class="form-group">
+                    <label><i class="fa fa-file-prescription"></i> Stock:</label>
+                    {{ form.stock }}
+                </div>
+            </div>
+
+
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block col-lg-6 mx-auto">Enviar</button>
+        </div>
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'lib/adminLTE/plugins/select2/js/select2.full.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('.select2').select2()
+        });
+
+    </script>
+{% endblock %}

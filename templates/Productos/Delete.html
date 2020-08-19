@@ -1,0 +1,53 @@
+{% extends 'Categoria/Delete.html' %}
+{% load static %}
+{% block titulo %}
+    Eliminar Producto
+{% endblock %}
+{% block titulobody %}
+    <h1>Eliminar Producto</h1>
+{% endblock %}
+{% block contenido %}
+    <form method="post" action=".">
+        <div class="card card-default">
+            <div class="card-header">
+                <h4 class="card-title">
+                    <i class="fas fa-trash"></i>
+                    Elminiar Registro
+                </h4>
+            </div>
+            <div class="card-body ">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <h5> Atencion!</h5>
+                        Error en elemento diligenciado
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="alert alert-danger alert-dismissible col-lg-9">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-ban"></i> Antes de eliminar</h5>
+
+                        ¿Quiere eliminar el registro del producto {{ producto.nombre }} ?
+
+                    </div>
+                    <div class="col-lg-3">
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" style="width: 100px; height: 80px" alt="">
+
+                        {% else %}
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success btn-flat">
+                    <i class="fas fa-check"></i> Eliminar Registro
+                </button>
+                <a href="{% url 'stock:ListaProductos' %} " class="btn btn-secondary btn-flat">
+                    <i class="fa fa-times"> </i> Conservar Registro</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
